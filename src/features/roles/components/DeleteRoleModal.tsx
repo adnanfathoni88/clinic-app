@@ -1,7 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
-import { useDeleteRole } from "../hooks/useRoles"
+import { useDeleteRole } from "../useRoles"
+
+import { FaTrash } from "react-icons/fa6";
 
 type Props = {
     role: {
@@ -26,8 +28,9 @@ export default function DeleteRoleModal({ role }: Props) {
     return (
         <>
             {/* trigger */}
-            <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" onClick={() => setIsOpen(true)}>
-                Delete
+            <button className="text-[#7D8FA9]"
+                onClick={() => setIsOpen(true)}>
+                <FaTrash />
             </button>
 
             {/* modal */}

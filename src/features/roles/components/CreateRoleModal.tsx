@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { useCreateRole } from "../hooks/useRoles"
+import { useCreateRole } from "../useRoles"
 
 export default function CreateRoleModal() {
     const [isOpen, setIsOpen] = useState(false)
@@ -26,9 +26,9 @@ export default function CreateRoleModal() {
         <>
             <div className="lex items-center justify-between mb-4">
                 <h1 className="text-2xl font-bold mb-4">Roles</h1>
-                <button onClick={() => setIsOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                {/* <button onClick={() => setIsOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Create Role
-                </button>
+                </button> */}
             </div>
 
             {isOpen && (

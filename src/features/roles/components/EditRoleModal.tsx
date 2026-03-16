@@ -1,7 +1,11 @@
 "use client"
 
 import React, { useState } from "react"
-import { useUpdateRole } from "../hooks/useRoles"
+import { useUpdateRole } from "../useRoles"
+
+import { BiSolidPencil } from "react-icons/bi";
+
+
 
 type Props = {
     role: {
@@ -31,8 +35,9 @@ export default function EditRoleModal({ role }: Props) {
     return (
         <>
             {/* trigger */}
-            <button className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600" onClick={() => setIsOpen(true)}>
-                Edit
+            <button className="text-[#7D8FA9]"
+                onClick={() => setIsOpen(true)}>
+                <BiSolidPencil />
             </button>
 
             {/* modal */}

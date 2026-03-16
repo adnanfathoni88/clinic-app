@@ -1,151 +1,277 @@
-# Clinic App - Project Structure
+# Clinic App - Project Structure Documentation
 
 ## Overview
 
-A Next.js 16 clinic application built with React 19, TypeScript, Prisma ORM, and Tailwind CSS 4.
+This is a **Next.js 16** application built with **TypeScript**, designed as a clinic management system. The project follows a feature-based architecture with clear separation of concerns.
 
 ---
 
-## Directory Structure
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 16.1.6 (App Router) |
+| **Language** | TypeScript 5 |
+| **Database** | PostgreSQL |
+| **ORM** | Prisma 7.4.2 |
+| **State Management** | TanStack React Query 5.90.21 |
+| **Styling** | Tailwind CSS 4 |
+| **React** | 19.2.3 |
+
+---
+
+## Project Structure
 
 ```
 clinic-app/
-├── src/                          # Source code
-│   ├── app/                      # Next.js App Router
-│   │   ├── (dashboard)/          # Route group for dashboard pages
-│   │   │   └── roles/
-│   │   │       └── page.tsx      # Roles management page
-│   │   ├── generated/            # Generated code (Prisma client)
-│   │   │   └── prisma/           # Prisma generated types
-│   │   ├── favicon.ico
-│   │   ├── globals.css           # Global styles (Tailwind)
-│   │   ├── layout.tsx            # Root layout
-│   │   └── page.tsx              # Home page
-│   │
-│   ├── features/                 # Feature-based modules
-│   │   └── roles/                # Roles feature
-│   │       ├── api/              # Feature API layer
-│   │       │   └── roles.api.ts  # Roles API functions
-│   │       ├── components/       # Feature components
-│   │       │   └── RoleTable.tsx # Roles table component
-│   │       └── hooks/            # Feature hooks
-│   │           └── useRoles.tsx  # Roles data fetching hook
-│   │
-│   ├── lib/                      # Utility libraries
-│   │   └── prisma.ts             # Prisma client instance
-│   │
-│   ├── providers/                # Context providers
-│   │   └── query.tsx             # TanStack Query provider
-│   │
-│   └── services/                 # Service layer
-│       └── role.service.ts       # Role service functions
-│
-├── prisma/                       # Prisma ORM
-│   ├── migrations/               # Database migrations
-│   └── schema.prisma             # Database schema
-│
-├── public/                       # Static assets
-│
-├── documentation/                # Project documentation
-│   └── PROJECT_STRUCTURE.md      # This file
-│
-├── .next/                        # Next.js build output
-├── node_modules/                 # Dependencies
-│
-├── .gitignore
-├── eslint.config.mjs             # ESLint configuration
-├── next.config.ts                # Next.js configuration
-├── package.json                  # Project dependencies & scripts
-├── package-lock.json             # Dependency lock file
-├── postcss.config.mjs            # PostCSS configuration
-├── prisma.config.ts              # Prisma configuration
-├── README.md
-└── tsconfig.json                 # TypeScript configuration
+├── documentation/          # Project documentation
+├── prisma/                 # Database schema and migrations
+│   ├── schema.prisma       # Prisma schema definition
+│   └── migrations/         # Database migration files
+├── src/
+│   ├── app/                # Next.js App Router pages and layouts
+│   │   ├── (dashboard)/    # Dashboard route group
+│   │   │   └── roles/      # Roles management page
+│   │   ├── api/            # API routes
+│   │   │   └── roles/      # Roles API endpoints
+│   │   ├── generated/      # Auto-generated Prisma client
+│   │   ├── layout.tsx      # Root layout
+│   │   ├── page.tsx        # Home page
+│   │   └── globals.css     # Global styles
+│   ├── features/           # Feature-based modules
+│   │   └── roles/          # Roles feature module
+│   │       ├── api/        # Feature API functions
+│   │       ├── components/ # React components
+│   │       └── hooks/      # Custom React hooks
+│   ├── lib/                # Core utilities and configurations
+│   │   └── prisma.ts       # Prisma client singleton
+│   ├── providers/          # React context providers
+│   │   └── query.tsx       # React Query provider
+│   └── services/           # Business logic layer
+│       └── role.service.ts # Role business logic
+├── package.json            # Dependencies and scripts
+├── tsconfig.json           # TypeScript configuration
+├── next.config.ts          # Next.js configuration
+├── tailwind.config.ts      # Tailwind CSS configuration
+└── eslint.config.mjs       # ESLint configuration
 ```
 
 ---
 
-## Technology Stack
+## Directory Descriptions
 
-| Category       | Technology          | Version    |
-|----------------|---------------------|------------|
-| Framework      | Next.js             | 16.1.6     |
-| UI Library     | React               | 19.2.3     |
-| Language       | TypeScript          | ^5         |
-| ORM            | Prisma              | ^7.4.2     |
-| Database       | PostgreSQL          | -          |
-| Styling        | Tailwind CSS        | ^4         |
-| Data Fetching  | TanStack Query      | ^5.90.21   |
-| Linting        | ESLint              | ^9         |
+### `/src/app`
+Next.js App Router directory containing all routes, layouts, and API endpoints.
 
----
+- **`(dashboard)/`** - Route group for dashboard pages (parentheses exclude from URL path)
+- **`api/`** - API route handlers (REST endpoints)
+- **`generated/`** - Auto-generated Prisma client (do not modify manually)
+- **`layout.tsx`** - Root layout with providers
+- **`page.tsx`** - Home page entry point
 
-## Key Files Description
+### `/src/features`
+Feature-based modules following the **Feature-Sliced Design** pattern. Each feature contains its own API functions, components, and hooks.
 
-### Configuration Files
+**Structure per feature:**
+```
+features/<feature-name>/
+├── api/        # API functions (fetch calls)
+├── components/ # React components specific to feature
+└── hooks/      # Custom React hooks
+```
 
-| File                    | Purpose                                      |
-|-------------------------|----------------------------------------------|
-| `next.config.ts`        | Next.js framework configuration              |
-| `tsconfig.json`         | TypeScript compiler options                  |
-| `eslint.config.mjs`     | ESLint linting rules                         |
-| `postcss.config.mjs`    | PostCSS plugins configuration                |
-| `prisma.config.ts`      | Prisma ORM configuration                     |
-| `package.json`          | Project metadata and dependencies            |
+### `/src/lib`
+Core utilities and singleton instances.
 
-### App Router Files
+- **`prisma.ts`** - Prisma client singleton with connection pooling
 
-| File                    | Purpose                                      |
-|-------------------------|----------------------------------------------|
-| `src/app/layout.tsx`    | Root layout component                        |
-| `src/app/page.tsx`      | Home page component                          |
-| `src/app/globals.css`   | Global CSS with Tailwind directives          |
+### `/src/providers`
+React context providers for global state and configuration.
 
-### Database Schema
+- **`query.tsx`** - TanStack React Query client provider
 
-**Prisma Schema** (`prisma/schema.prisma`):
-- **Model**: `Role`
-  - `id`: Integer (auto-incrementing primary key)
-  - `name`: String
-  - `createdAt`: DateTime (default: now)
-  - `updatedAt`: DateTime (auto-updated)
+### `/src/services`
+Business logic layer that interacts with the database via Prisma.
+
+### `/prisma`
+Database schema and migrations.
+
+- **`schema.prisma`** - Database models and Prisma configuration
 
 ---
 
-## Available Scripts
+## Key Files Explained
+
+### `src/lib/prisma.ts`
+Prisma client singleton with connection pooling for PostgreSQL:
+
+```typescript
+// Prevents multiple Prisma instances in development
+const globalForPrisma = global as unknown as { prisma: PrismaClient }
+export const prisma = globalForPrisma.prisma || new PrismaClient({ adapter })
+```
+
+### `src/providers/query.tsx`
+React Query client provider for server state management:
+
+```typescript
+const queryClient = new QueryClient()
+// Provides caching, background updates, and query invalidation
+```
+
+### `prisma/schema.prisma`
+Database schema definition:
+
+```prisma
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
+
+---
+
+## Feature Module: Roles
+
+The **Roles** feature demonstrates the complete architecture pattern:
+
+```
+src/features/roles/
+├── api/
+│   └── roles.api.ts      # HTTP fetch functions
+├── components/
+│   ├── CreateRoleModal.tsx
+│   ├── DeleteRoleModal.tsx
+│   ├── EditRoleModal.tsx
+│   ├── RoleForm.tsx
+│   └── RoleTable.tsx
+└── hooks/
+    └── useRoles.tsx      # React Query hooks
+```
+
+### Data Flow
+
+1. **Components** → Use custom hooks (`useRoles`, `useCreateRole`, etc.)
+2. **Hooks** → Call API functions (`roles.api.ts`)
+3. **API Functions** → Make HTTP requests to `/api/roles`
+4. **API Routes** → Call service layer (`role.service.ts`)
+5. **Service Layer** → Interact with database via Prisma
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/roles` | Fetch all roles |
+| `POST` | `/api/roles` | Create new role |
+| `PUT` | `/api/roles` | Update role (requires `id` and `name`) |
+| `DELETE` | `/api/roles/:id` | Delete role by ID |
+
+---
+
+## Custom Hooks
+
+### `useRoles()`
+Fetches all roles with React Query caching.
+
+### `useCreateRole()`
+Creates a role and invalidates the roles query cache.
+
+### `useUpdateRole()`
+Updates a role and invalidates the roles query cache.
+
+### `useDeleteRole()`
+Deletes a role and invalidates the roles query cache.
+
+---
+
+## Development Commands
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
+
+# Run linter
+npm run lint
+
+# Database commands
+npx prisma generate    # Generate Prisma client
+npx prisma migrate dev # Create and apply migration
+npx prisma studio      # Open Prisma Studio
 ```
 
 ---
 
-## Feature Modules
+## Architecture Patterns
 
-### Roles Management
+### 1. **Feature-Sliced Design**
+Each feature is self-contained with its own API, components, and hooks.
 
-| Layer         | File Path                                  |
-|---------------|--------------------------------------------|
-| API           | `src/features/roles/api/roles.api.ts`      |
-| Service       | `src/services/role.service.ts`             |
-| Page          | `src/app/(dashboard)/roles/page.tsx`       |
-| Component     | `src/features/roles/components/RoleTable.tsx` |
-| Hook          | `src/features/roles/hooks/useRoles.tsx`    |
+### 2. **Server State Management**
+TanStack React Query handles caching, background updates, and query invalidation.
 
----
+### 3. **Singleton Pattern**
+Prisma client uses singleton pattern to prevent multiple connections.
 
-## Generated Code
+### 4. **Route Groups**
+Next.js route groups `(dashboard)` organize pages without affecting URL structure.
 
-- **Prisma Client**: `src/app/generated/prisma/`
-  - Auto-generated TypeScript types and client from `schema.prisma`
+### 5. **Service Layer**
+Business logic is separated from API routes for better testability.
 
 ---
 
-## Notes
+## Environment Variables
 
-- Route groups `(dashboard)` are used for organizational purposes and don't affect the URL path
-- Prisma client is generated to `app/generated/prisma` (custom output path)
-- Tailwind CSS v4 uses the new `@tailwindcss/postcss` package
+Required environment variables:
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/clinic_db"
+```
+
+---
+
+## Database Setup
+
+1. Set `DATABASE_URL` environment variable
+2. Run migrations:
+   ```bash
+   npx prisma migrate dev
+   ```
+3. Generate Prisma client:
+   ```bash
+   npx prisma generate
+   ```
+
+---
+
+## Future Enhancements
+
+- [ ] Add authentication/authorization
+- [ ] Implement patient management feature
+- [ ] Add appointment scheduling
+- [ ] Create doctor/staff management
+- [ ] Add queue management system
+- [ ] Implement real-time notifications
+- [ ] Add reporting and analytics
+
+---
+
+## References
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [TanStack Query Documentation](https://tanstack.com/query/latest)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)

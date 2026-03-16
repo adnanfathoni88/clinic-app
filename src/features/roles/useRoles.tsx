@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Role } from "../../../app/generated/prisma/client";
-import { getRoles, createRole, updateRole, deleteRole } from "../api/roles.api";
+import { Role } from "../../app/generated/prisma/client";
+import { getRoles, createRole, updateRole, deleteRole } from "./roles.api";
 
 // get roles
 export const useRoles = () => {
