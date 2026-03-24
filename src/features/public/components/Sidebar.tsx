@@ -7,7 +7,7 @@ import { FaGear } from "react-icons/fa6";
 
 export default function Sidebar() {
     return (
-        <aside className="w-64 bg-[#1D232C] text-white py-8 px-6">
+        <aside className="w-64 bg-primary-900 text-white py-8 px-6">
             <h2 className="text-2xl font-bold mb-6">Clinic App</h2>
             <nav>
                 <ul>

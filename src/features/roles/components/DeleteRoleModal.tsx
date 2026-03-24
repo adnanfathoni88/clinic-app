@@ -4,6 +4,8 @@ import React, { useState } from "react"
 import { useDeleteRole } from "../useRoles"
 
 import { FaTrash } from "react-icons/fa6";
+import { IoIosClose } from "react-icons/io";
+
 
 type Props = {
     role: {
@@ -35,12 +37,12 @@ export default function DeleteRoleModal({ role }: Props) {
 
             {/* modal */}
             {isOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white text-black p-4 rounded w-1/2">
-                        <div className="flex items-center justify-between mb-4 border-b pb-2">
-                            <h2 className="text-xl font-bold mb-4">Delete Role</h2>
-                            <button className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600" onClick={() => setIsOpen(false)}>
-                                Close
+                <div className="fixed inset-0 bg-primary-800/90 flex items-center justify-center z-50">
+                    <div className="bg-primary-900 text-white p-6 rounded w-1/2">
+                        <div className="flex items-center justify-between mb-4 border-b border-primary-700 pb-2">
+                            <h2 className="text-xl font-bold">Delete Role</h2>
+                            <button className="text-gray-400 hover:text-gray-600 transition-colors duration-200 cursor-pointer" onClick={() => setIsOpen(false)}>
+                                <IoIosClose size={20} />
                             </button>
                         </div>
                         <p>Are you sure you want to delete the role "{role.name}"?</p>
