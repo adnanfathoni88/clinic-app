@@ -36,7 +36,7 @@ export default function EditRoleModal({ role }: Props) {
     return (
         <>
             {/* trigger */}
-            <button className="text-[#7D8FA9]"
+            <button className="text-gray-400 hover:text-gray-600 transition-colors duration-200 cursor-pointer"
                 onClick={() => setIsOpen(true)}>
                 <BiSolidPencil />
             </button>
