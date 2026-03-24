@@ -53,3 +53,20 @@ export async function deleteRole(id: number) {
         throw new Error("Failed to delete role")
     }
 }
+
+// bulk delete roles
+export async function bulkDeleteRoles(ids: number[]) {
+    const res = await fetch("/api/roles/bulk-delete", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ids })
+    })
+
+    if (!res.ok) {
+        throw new Error("Failed to delete roles")
+    }
+
+    return res.json()
+}

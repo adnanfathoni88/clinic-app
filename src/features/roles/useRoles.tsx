@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Role } from "../../app/generated/prisma/client";
-import { getRoles, createRole, updateRole, deleteRole } from "./roles.api";
+import { getRoles, createRole, updateRole, deleteRole, bulkDeleteRoles } from "./roles.api";
 
 // get roles
 export const useRoles = () => {
@@ -40,6 +40,18 @@ export const useDeleteRole = () => {
 
     return useMutation({
         mutationFn: deleteRole,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["roles"] })
+        }
+    });
+}
+
+// bulk delete
+export const useBulkDeleteRoles = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: bulkDeleteRoles,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["roles"] })
         }
